@@ -66,11 +66,11 @@ router.put("/:boardPw", async(req, res) => {
 })
 
 // 댓글 삭제
-router.delete("/:_commentId", async(req, res) => {
+router.delete("/:boardId", async(req, res) => {
     const { boardId } = req.params;
-    
+    console.log(boardId)
     try {
-        await Comment.deleteOne({ _id : boardId})
+        await Comment.findByIdAndDelete({boardId})
         res.json("댓글을 삭제했습니다.")
     }
     catch (e) {

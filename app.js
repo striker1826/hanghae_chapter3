@@ -4,10 +4,10 @@ const connect = require('./schemas');
 connect();
 const port = 3000;
 
-const postsRouter = require("./routes/posts.js");
-const commentsRouter = require("./routes/comments.js");
+const postsRouter = require("./routes/posts")
+const commentsRouter = require("./routes/comments");
 
-app.use(express.urlencoded({extended:true}))
+// app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 app.use("/posts", postsRouter);
 

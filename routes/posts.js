@@ -23,16 +23,17 @@ router.get("/", async(req, res) => {
 
 // 게시글 작성
 router.post("/", async (req, res) => {
-    console.log(req.body)
+   
 
     const {user, password, title, content} = req.body;
     try {
-        const createdPost = await Posts.create({user, password, title, content})
-        return res.json({message: "게시글을 생성하였습니다."})
+        await Posts.create({ user, password, title, content })
+        res.json( {message: "게시글을 생성하였습니다."} )
     }
     catch (e) {
-        res.status(400).json("댓글 내용을 입력해주세요")
+        res.status(400).json({sucess: false, errorMessage:"해당 게시글을 생성할 수 없습니다."})
     }
+    console.log(req.body)
 })
 
 // 게시글 상세 조회
@@ -63,7 +64,7 @@ router.put("/:boardpassword", async (req, res) => {
     const { password, title, content, user } = req.body;
     
     try { 
-        await Posts.findOneAndUpdate( {password: boardpassword}, {title : title, content : content, user: user}, {new : true});
+        await Posts.findOneAndUpdate( {password: boardpassword}, {title : title, content : content, user: user}, {new : true} );
         res.json({ result: "success" })
     }catch(e){
         return res.status(400).json({ success: false, errorMessage: e });
